@@ -30,7 +30,7 @@ Je zde využit princip dědičnosti - všechny naše vlastní modely pocházejí
 a dědí její vlastnosti """
 
 
-class Genre(models.Model):
+class Zavod(models.Model):
     """Fields - definice jednotlivých polí/sloupců modelu/tabulky
 
     Každé pole modelu (budoucí tabulky v databázi) je uloženo do vhodně pojmenované proměnné/atributu - zde "name"
@@ -45,8 +45,18 @@ class Genre(models.Model):
 
     a uživateli se jako nápověda nabídne text uvedený v parametru help_text """
 
-    name = models.CharField(max_length=50, unique=True, verbose_name="Genre name",
-                            help_text='Enter a film genre (e.g. sci-fi, comedy)')
+    name = models.CharField(max_length=50, unique=True, verbose_name="jmeno zavodu",
+                            help_text='zadejte nazev zavodu')
+    date = models.DateField(blank=True, null=True,
+
+                                    help_text="Please use the following format: <em>YYYY-MM-DD</em>.",
+
+                                    verbose_name="Release date")
+    length = models.IntegerField(blank=True, null=True,
+
+                                  help_text="uvedte vzdalenost v minutach",
+
+                                  verbose_name="length")
 
     """ Metadata - slouží ke specifikaci některých dalších vlastností modelu, jež ale už mohou být v řadě případů závislé 
 
@@ -55,7 +65,7 @@ class Genre(models.Model):
     class Meta:
         # atribut ordering definuje upřednostňovaný způsob řazení - zde vzestupně podle pole/sloupce name
 
-        ordering = ["name"]
+        ordering = ["date"]
 
     """ Methods - definují chování objektu v určité situaci """
 
@@ -117,7 +127,7 @@ class Film(models.Model):
 
     # Vytvoří vztah mezi modely Film a Genre typu M:N
 
-    genres = models.ManyToManyField(Genre, help_text='Select a genre for this film')
+    # zavody = models.ManyToManyField(Zavod, help_text='Select a genre for this film')
 
     # Metadata
 
