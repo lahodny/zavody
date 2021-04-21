@@ -8,3 +8,4 @@ from .models import *
 
 admin.site.register(Zavod)
 admin.site.register(Film)
+
